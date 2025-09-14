@@ -1,0 +1,27 @@
+{
+  "name": "transcript-server",
+  "version": "1.0.0",
+  "description": "Transcript Manager API server (Assignment #1)",
+  "main": "src/server.ts",
+  "scripts": {
+    "start": "ts-node src/server.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.3.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
+  },
+  "scripts": {
+  "start": "ts-node src/server.ts",
+  "build": "tsc"
+  }
+}
