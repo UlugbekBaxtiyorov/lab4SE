@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Transcript Client</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="module">
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('btnGetTranscripts').addEventListener('click', async () => {
+                try {
+                    const response = await axios.get('http://localhost:8080/transcripts');
+                    const transcripts = response.data;
+                    const container = document.getElementById('transcriptsContainer');
+                    container.innerHTML = '';
+                    transcripts.forEach(transcript => {
+                        const div = document.createElement('div');
+                        div.innerHTML = `<strong>Student:</strong> ${transcript.student.studentName}<br><strong>Grades:</strong>`;
+                        if (transcript.grades && transcript.grades.length > 0) {
+                            const ul = document.createElement('ul');
+                            transcript.grades.forEach(grade => {
+                                const li = document.createElement('li');
+                                li.textContent = `${grade.course}: ${grade.grade}`;
+                                ul.appendChild(li);
+                            });
+                            div.appendChild(ul);
+                        } else {
+                            div.innerHTML += ' None';
+                        }
+                        container.appendChild(div);
+                    });
+                } catch (error) {
+                    alert('Failed to fetch transcripts: ' + error);
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <!-- Get transcripts -->
+    <section>
+        <button id="btnGetTranscripts">Get transcripts</button>
+        <div id="transcriptsContainer"></div>
+    </section>
+</body>
+</html>
